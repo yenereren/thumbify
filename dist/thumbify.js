@@ -1,5 +1,5 @@
 /*
- * Owl Carousel v1.0.0
+ * Thumbify Pruduct Image Slider v1.0.0
  * Copyright 2017 Eren Yener
  */
 
