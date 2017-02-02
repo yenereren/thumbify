@@ -89,16 +89,28 @@
     };
 
     Thumbify.prototype.slide =function () {
+        this.log('slide');
         var section = this.getSection();
-        console.log("section => " + section);
+        this.slideTo(section);
+    };
+
+    Thumbify.prototype.slideTo = function(section){
+        var translateToX = this.getTranslateToX(section);
+        var coordinates= "translate3d(-" + translateToX + "px, 0px, 0px)"
+        this.$element.css('transform', coordinates);
+    };
+
+    Thumbify.prototype.getTranslateToX = function(section){
+        var translateToX = section*this.options.width;
+        console.log(translateToX);
+        return translateToX;
     };
 
     Thumbify.prototype.getSection =function () {
         var sectionWidth = Math.floor( this.options.width / this.imageCount );
         var currentX = this.cursorPosition.left;
-        var section = Math.floor(currentX / sectionWidth) + 1;
-        section = section > this.imageCount ? this.imageCount : section;
-
+        var section = Math.floor(currentX / sectionWidth);
+        section = section >= this.imageCount ? this.imageCount - 1 : section;
         return section;
     };
 
