@@ -79,8 +79,8 @@
             left: e.pageX - this.elementOffset.left,
             top: e.pageY - this.elementOffset.top
         };
-        
-        this.handleMouseMove();
+
+        this.slide();
     };
 
     Thumbify.prototype.onMouseOut = function(){
@@ -88,12 +88,15 @@
         this.destroy();
     };
 
-    Thumbify.prototype.handleMouseMove =function () {
-
+    Thumbify.prototype.slide =function () {
+        var section = this.getSection();
     };
 
     Thumbify.prototype.getSection =function () {
-
+        var sectionWidth = Math.floor( this.options.width / this.imageCount );
+        var currentX = this.cursorPosition.left;
+        var section = Math.floor(currentX / sectionWidth) + 1;
+        section = section > this.imageCount ? this.imageCount : section;
     };
 
     Thumbify.prototype.createDelegate = function(scope) {
