@@ -11,6 +11,7 @@
         this.options = $.extend({}, Thumbify.Defaults, options);
         this.$element = $(element);
         this.$images = this.$element.find('img');
+        this.$wrapper = null;
 
         this.setup();
     }
@@ -43,6 +44,7 @@
     Thumbify.prototype.wrap = function(){
         this.log('wrap');
         this.$element.wrap( this.options.wrapper );
+        this.$wrapper = this.$element.parent();
     };
 
     Thumbify.prototype.registerStyles = function(){
@@ -52,6 +54,7 @@
         this.$element.css('width', this.options.width);
         this.$images.addClass(this.options.imageClass);
         this.$images.css('width', this.options.width);
+        this.$wrapper.css('width', this.options.width);
     };
 
     $.fn.thumbify = function(option) {

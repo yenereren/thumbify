@@ -1,3 +1,7 @@
+.thumbify-outer {
+    overflow: hidden;
+}
+
 .thumbify-stage {
     position: relative;
     overflow: hidden;
