@@ -90,6 +90,7 @@
 
     Thumbify.prototype.slide =function () {
         var section = this.getSection();
+        console.log("section => " + section);
     };
 
     Thumbify.prototype.getSection =function () {
@@ -97,6 +98,8 @@
         var currentX = this.cursorPosition.left;
         var section = Math.floor(currentX / sectionWidth) + 1;
         section = section > this.imageCount ? this.imageCount : section;
+
+        return section;
     };
 
     Thumbify.prototype.createDelegate = function(scope) {
