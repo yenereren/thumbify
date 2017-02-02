@@ -11,6 +11,7 @@
         this.options = $.extend({}, Thumbify.Defaults, options);
         this.$element = $(element);
         this.$images = this.$element.find('img');
+        this.imageCount = this.$images.length;
         this.$wrapper = null;
 
         this.setup();
@@ -51,10 +52,16 @@
         var self =this;
         this.log('registerStyles');
         this.$element.addClass(this.options.containerClass);
-        this.$element.css('width', this.options.width);
+        this.$element.css('width', this.getImageContainerWidth());
+        this.$element.css('transform', 'translate3d(0px, 0px, 0px)');
+        this.$element.css('transition', '0');
         this.$images.addClass(this.options.imageClass);
         this.$images.css('width', this.options.width);
         this.$wrapper.css('width', this.options.width);
+    };
+
+    Thumbify.prototype.getImageContainerWidth = function(){
+        return this.options.width * this.imageCount;
     };
 
     $.fn.thumbify = function(option) {
