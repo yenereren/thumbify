@@ -34,6 +34,7 @@
 
         this.wrap();
         this.registerStyles();
+        this.registerEvents();
     };
 
     Thumbify.prototype.log = function(message) {
@@ -60,8 +61,33 @@
         this.$wrapper.css('width', this.options.width);
     };
 
+    Thumbify.prototype.registerEvents = function () {
+        this.log('registerEvents');
+        this.$wrapper.on( "mousemove", $.proxy( this.onMouseMove, this));
+        this.$wrapper.bind( "mouseexit", $.proxy( this.onMouseExit, this));
+    };
+
     Thumbify.prototype.getImageContainerWidth = function(){
         return this.options.width * this.imageCount;
+    };
+
+    Thumbify.prototype.onMouseMove = function(){
+        this.log('onMouseMove');
+    };
+
+    Thumbify.prototype.onMouseExit = function(){
+        this.log('onMouseExit');
+    };
+
+    Thumbify.prototype.getSection =function () {
+
+    };
+
+    Thumbify.prototype.createDelegate = function(scope) {
+        var fn = this;
+        return function() {
+            return fn.apply(scope, arguments);
+        }
     };
 
     $.fn.thumbify = function(option) {
