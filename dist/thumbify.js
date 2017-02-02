@@ -20,14 +20,17 @@
         showNagivation:true,
         width:250,
 
-        containerClass:'thumbify-container',
-        imageClass:'thumbify-image',
+        containerClass:'thumbify-stage',
+        imageClass:'thumbify-item',
 
+        wrapper:"<div class='thumbify-outer'></div>",
         debugMode:true,
     };
 
     Thumbify.prototype.setup = function() {
         this.log('setup');
+
+        this.wrap();
         this.registerStyles();
     };
 
@@ -37,12 +40,17 @@
         }
     };
 
+    Thumbify.prototype.wrap = function(){
+        this.$element.wrap( this.options.wrapper );
+    };
+
     Thumbify.prototype.registerStyles = function(){
         var self =this;
         this.log('registerStyles');
         this.$element.addClass(this.options.containerClass);
         this.$element.css('width', this.options.width);
         this.$images.addClass(this.options.imageClass);
+        this.$images.css('width', this.options.width);
     };
 
     $.fn.thumbify = function(option) {

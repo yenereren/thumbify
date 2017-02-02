@@ -1,5 +1,13 @@
-.thumbify-container {
+.thumbify-stage {
     position: relative;
     overflow: hidden;
-    white-space: nowrap;
+}
+
+.thumbify-item{
+    position: relative;
+    min-height: 1px;
+    float: left;
+    -webkit-backface-visibility: hidden;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
 }
