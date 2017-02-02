@@ -41,6 +41,7 @@
     };
 
     Thumbify.prototype.wrap = function(){
+        this.log('wrap');
         this.$element.wrap( this.options.wrapper );
     };
 
