@@ -1,5 +1,5 @@
 /*
- * Thumbify Pruduct Image Slider v1.0.0
+ * Thumbify Pruduct Image Slider v0.0.1
  * Copyright 2017 Eren Yener
  */
 
@@ -13,6 +13,8 @@
         this.$images = this.$element.find('img');
         this.imageCount = this.$images.length;
         this.$wrapper = null;
+        this.elementOffset = this.$element.offset();
+        this.cursorPosition = null;
 
         this.setup();
     }
@@ -71,12 +73,23 @@
         return this.options.width * this.imageCount;
     };
 
-    Thumbify.prototype.onMouseMove = function(){
+    Thumbify.prototype.onMouseMove = function(e){
         this.log('onMouseMove');
+        this.cursorPosition = {
+            left: e.pageX - this.elementOffset.left,
+            top: e.pageY - this.elementOffset.top
+        };
+        
+        this.handleMouseMove();
     };
 
     Thumbify.prototype.onMouseOut = function(){
         this.log('onMouseOut');
+        this.destroy();
+    };
+
+    Thumbify.prototype.handleMouseMove =function () {
+
     };
 
     Thumbify.prototype.getSection =function () {
@@ -91,7 +104,7 @@
     };
 
     Thumbify.prototype.destroy = function() {
-
+        this.log('destroy');
     };
 
     $.fn.thumbify = function(option) {
