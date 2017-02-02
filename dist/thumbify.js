@@ -64,7 +64,7 @@
     Thumbify.prototype.registerEvents = function () {
         this.log('registerEvents');
         this.$wrapper.on( "mousemove", $.proxy( this.onMouseMove, this));
-        this.$wrapper.bind( "mouseexit", $.proxy( this.onMouseExit, this));
+        this.$wrapper.on( "mouseexit", $.proxy( this.onMouseExit, this));
     };
 
     Thumbify.prototype.getImageContainerWidth = function(){
@@ -88,6 +88,10 @@
         return function() {
             return fn.apply(scope, arguments);
         }
+    };
+
+    Thumbify.prototype.destroy = function() {
+
     };
 
     $.fn.thumbify = function(option) {
