@@ -12,15 +12,18 @@
         this.$element = $(element);
         this.$images = this.$element.find('img');
 
-
         this.setup();
     }
 
     Thumbify.Defaults = {
-        debugMode:true,
+
         showNagivation:true,
+        width:250,
+
         containerClass:'thumbify-container',
-        imageClass:'thumbify-image'
+        imageClass:'thumbify-image',
+
+        debugMode:true,
     };
 
     Thumbify.prototype.setup = function() {
@@ -38,6 +41,7 @@
         var self =this;
         this.log('registerStyles');
         this.$element.addClass(this.options.containerClass);
+        this.$element.css('width', this.options.width);
         this.$images.addClass(this.options.imageClass);
     };
 
@@ -45,7 +49,6 @@
         var args = Array.prototype.slice.call(arguments, 1);
 
         return this.each(function() {
-            var $this = $(this);
             new Thumbify(this, typeof option == 'object' && option);
         });
     };
