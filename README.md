@@ -1,7 +1,6 @@
 # Thumbify
 
-
-## Product Image Thumbfier Beta
+Product Image Thumbfier Beta
 
 ## Quick start
 
