@@ -28,7 +28,7 @@
         imageClass:'thumbify-item',
 
         wrapper:"<div class='thumbify-outer'></div>",
-        debugMode:true,
+        debugMode:false,
     };
 
     Thumbify.prototype.setup = function() {
@@ -65,8 +65,8 @@
 
     Thumbify.prototype.registerEvents = function () {
         this.log('registerEvents');
-        this.$wrapper.on( "mousemove", $.proxy( this.onMouseMove, this));
-        this.$wrapper.on( "mouseout", $.proxy( this.onMouseOut, this));
+        this.$wrapper.bind( "mousemove", $.proxy( this.onMouseMove, this));
+        this.$wrapper.bind( "mouseleave", $.proxy( this.onMouseOut, this));
     };
 
     Thumbify.prototype.getImageContainerWidth = function(){
@@ -91,6 +91,7 @@
     Thumbify.prototype.slide =function () {
         this.log('slide');
         var section = this.getSection();
+        console.log("section => " + section);
         this.slideTo(section);
     };
 
@@ -102,7 +103,6 @@
 
     Thumbify.prototype.getTranslateToX = function(section){
         var translateToX = section*this.options.width;
-        console.log(translateToX);
         return translateToX;
     };
 
@@ -123,6 +123,7 @@
 
     Thumbify.prototype.destroy = function() {
         this.log('destroy');
+        this.$element.css('transform', 'translate3d(0px, 0px, 0px)');
     };
 
     $.fn.thumbify = function(option) {
