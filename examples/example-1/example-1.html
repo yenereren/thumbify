@@ -142,7 +142,10 @@
 
 <script>
     $(document).ready(function(){
-        $('.product-images-container').thumbify();
+        var config = {
+            width:500
+        };
+        $('.product-images-container').thumbify(config);
     });
 
 </script>

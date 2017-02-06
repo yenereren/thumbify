@@ -80,8 +80,6 @@
             left: (relX < 0 ) ? relX * -1 : relX
         };
 
-        console.log(this.cursorPosition);
-
         this.slide();
     };
 
