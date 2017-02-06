@@ -28,6 +28,8 @@
         imageClass:'thumbify-item',
 
         wrapper:"<div class='thumbify-outer'></div>",
+        navigation:"<div class='thumbify-navigator'></div>",
+        navigationStep:"<div class='thumbify-navigator-step'></div>",
         debugMode:false,
     };
 
@@ -35,6 +37,7 @@
         this.log('setup');
         this.wrap();
         this.registerStyles();
+        this.appendNavbar();
         this.registerEvents();
     };
 
@@ -48,6 +51,11 @@
         this.log('wrap');
         this.$element.wrap( this.options.wrapper );
         this.$wrapper = this.$element.parent();
+    };
+
+    Thumbify.prototype.appendNavbar = function(){
+        this.log('appendNavbar');
+        this.$wrapper.append(this.options.navigation);
     };
 
     Thumbify.prototype.registerStyles = function(){
