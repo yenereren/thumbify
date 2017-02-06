@@ -23,6 +23,22 @@ Put the script at the bottom of your markup right after jQuery:
 <script src="thumbify.js"></script>
 ```
 
+### Usage
+
+```html
+<div class="product-images-container">
+    <img src="image1">
+    <img src="image2">
+    <img src="image3">
+div>
+```
+
+```js
+$(document).ready(function(){
+  $('.owl-carousel').owlCarousel();
+});
+```
+
 ## License
 
 The code and the documentation are released under the [GPL](LICENSE).
