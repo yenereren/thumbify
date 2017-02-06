@@ -13,6 +13,8 @@
         this.$images = this.$element.find('img');
         this.imageCount = this.$images.length;
         this.$wrapper = null;
+        this.$navbar = null;
+        this.currentSection = null;
         this.elementOffset = this.$element.offset();
         this.cursorPosition = null;
 
@@ -29,7 +31,8 @@
 
         wrapper:"<div class='thumbify-outer'></div>",
         navigation:"<div class='thumbify-navigator'></div>",
-        navigationStep:"<div class='thumbify-navigator-step'></div>",
+        navigationStep:"<div class='thumbify-navigator-step' data-id='{{dataId}}'></div>",
+        navStepDataId:"{{dataId}}",
         debugMode:false,
     };
 
@@ -37,7 +40,9 @@
         this.log('setup');
         this.wrap();
         this.registerStyles();
-        this.appendNavbar();
+        if(this.options.showNagivation){
+            this.appendNavbar();
+        }
         this.registerEvents();
     };
 
@@ -54,8 +59,21 @@
     };
 
     Thumbify.prototype.appendNavbar = function(){
-        this.log('appendNavbar');
-        this.$wrapper.append(this.options.navigation);
+        var self = this;
+
+        self.log('appendNavbar');
+        self.$wrapper.append(self.options.navigation);
+        self.$navbar = self.$wrapper.find('.thumbify-navigator');
+
+        for(var i=1; i<=this.imageCount; i++){
+            var navElement = self.getNavElement(i);
+            self.$navbar.append(navElement);
+        }
+    };
+
+    Thumbify.prototype.getNavElement = function(dataId){
+        var navElement  = this.options.navigationStep.replace(this.options.navStepDataId, dataId);
+        return navElement;
     };
 
     Thumbify.prototype.registerStyles = function(){
@@ -73,6 +91,7 @@
     Thumbify.prototype.registerEvents = function () {
         this.log('registerEvents');
         this.$wrapper.bind( "mousemove", $.proxy( this.onMouseMove, this));
+        this.$wrapper.bind( "mouseenter", $.proxy( this.onMouseEnter, this));
         this.$wrapper.bind( "mouseleave", $.proxy( this.onMouseOut, this));
     };
 
@@ -83,29 +102,69 @@
     Thumbify.prototype.onMouseMove = function(e){
         this.log('onMouseMove');
         var parentOffset = this.$element.parent().offset();
-        var relX = e.pageX - parentOffset.left;
-        this.cursorPosition = {
-            left: (relX < 0 ) ? relX * -1 : relX
-        };
+        if(!!parentOffset){
+            var relX = e.pageX - parentOffset.left;
+            this.cursorPosition = {
+                left: (relX < 0 ) ? relX * -1 : relX
+            };
+            this.slide();
+        }
+    };
 
-        this.slide();
+    Thumbify.prototype.onMouseEnter = function(){
+        this.log('onMouseEnter');
+        this.showHideNavbar(true);
     };
 
     Thumbify.prototype.onMouseOut = function(){
         this.log('onMouseOut');
+        this.showHideNavbar(false);
         this.destroy();
+    };
+
+    Thumbify.prototype.showHideNavbar =function (show) {
+        this.log('showHideNavbar');
+
+        if(this.options.showNagivation){
+            if(show){
+                this.$navbar.show();
+            }else{
+                this.$navbar.hide();
+            }
+        }
+        var section = this.getSection();
+        this.slideTo(section);
     };
 
     Thumbify.prototype.slide =function () {
         this.log('slide');
         var section = this.getSection();
-        this.slideTo(section);
+
+        if(this.currentSection != section){
+            this.slideTo(section);
+            this.navTo(section);
+        }
     };
 
     Thumbify.prototype.slideTo = function(section){
+        this.log('slideTo');
         var translateToX = this.getTranslateToX(section);
-        var coordinates= "translate3d(-" + translateToX + "px, 0px, 0px)"
+        var coordinates= "translate3d(-" + translateToX + "px, 0px, 0px)";
         this.$element.css('transform', coordinates);
+    };
+
+    Thumbify.prototype.navTo = function(section){
+        this.log('navTo');
+        var steps = this.$navbar.find('.thumbify-navigator-step');
+
+        if(!!steps){
+            $(steps).removeClass('active');
+            var currentNavStep = steps[section];
+
+            if(!!currentNavStep){
+                $(currentNavStep).addClass('active');
+            }
+        }
     };
 
     Thumbify.prototype.getTranslateToX = function(section){
@@ -115,10 +174,12 @@
 
     Thumbify.prototype.getSection =function () {
         var sectionWidth = Math.floor( this.options.width / this.imageCount );
-        var currentX = this.cursorPosition.left;
-        var section = Math.floor(currentX / sectionWidth);
-        section = section >= this.imageCount ? this.imageCount - 1 : section;
-        return section;
+        if(!!this.cursorPosition){
+            var currentX = this.cursorPosition.left;
+            var section = Math.floor(currentX / sectionWidth);
+            section = section >= this.imageCount ? this.imageCount - 1 : section;
+            return section;
+        }
     };
 
     Thumbify.prototype.createDelegate = function(scope) {
