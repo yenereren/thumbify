@@ -1,11 +1,13 @@
 # Thumbify
 
-Product Image Thumbfier
-
-Demo is HERE
+Product Image Thumbifier
 
 
 ## Quick start
+
+###DEMO
+
+Demo is HERE
 
 ### Install
 
