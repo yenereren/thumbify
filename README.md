@@ -48,6 +48,10 @@ $(document).ready(function(){
 );
 ```
 
+### Usage
+
+There is no tests added, but this does not mean, it will last forever
+
 ## License
 
 The code and the documentation are released under the [GPL](LICENSE).
