@@ -1,5 +1,5 @@
 /*
- * Thumbify Pruduct Image Slider v0.0.1
+ * Thumbify Pruduct Image Slider v0.0.2
  * Copyright 2017 Eren Yener
  */
 
