@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="../../dist/assets/thumbify.css" rel="stylesheet" type="text/css">
+    <link href="thumbify/thumbify.css" rel="stylesheet" type="text/css">
     <title>Example 1</title>
 </head>
 
@@ -138,13 +138,12 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="../../dist/thumbify.js"></script>
+<script src="thumbify/thumbify.js"></script>
 
 <script>
+
     $(document).ready(function(){
-        var config = {
-            width:500
-        };
+        var config = { width:500 };
         $('.product-images-container').thumbify(config);
     });
 
