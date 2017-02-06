@@ -35,8 +35,14 @@ div>
 
 ```js
 $(document).ready(function(){
-  $('.owl-carousel').owlCarousel();
-});
+
+        var config = {
+            width:500,
+            showNagivation:true
+        };
+
+        $('.product-images-container').thumbify(config);
+    });
 ```
 
 ## License
