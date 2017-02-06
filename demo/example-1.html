@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="thumbify/thumbify.css" rel="stylesheet" type="text/css">
+    <title>Example 1</title>
+</head>
+
+<style>
+    .products {
+        float: left;
+        margin-left: 20px;
+    }
+
+    .row {
+        margin-top: 20px;
+        float: left;
+    }
+</style>
+<body>
+
+<div class="container">
+
+    <div class="starter-template">
+
+        <div class="row">
+
+            <div class="products">
+                <div class="product-images-container">
+                    <img src="https://img-trendyol.mncdn.com/mnresize/250/550//Assets/ProductImages/57736/2314196402929_1_org_zoom.jpg">
+                    <img src="https://img-trendyol.mncdn.com/mnresize/250/550//Assets/ProductImages/57736/2314196403025_1_org_zoom.jpg">
+                    <img src="https://img-trendyol.mncdn.com/mnresize/250/550//Assets/ProductImages/57736/2314196402257_1_org_zoom.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="thumbify/thumbify.js"></script>
+
+<script>
+
+    $(document).ready(function(){
+        var config = {
+            width:500,
+            showNagivation:true
+
+        };
+        $('.product-images-container').thumbify(config);
+    });
+
+</script>
+</body>
+</html>
