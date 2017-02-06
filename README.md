@@ -3,9 +3,10 @@
 Product Image Thumbifier
 
 
+
 ## Quick start
 
-###DEMO
+###Demo
 
 Demo is HERE
 
