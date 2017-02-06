@@ -8,7 +8,7 @@ Product Image Thumbifier
 
 ###Demo
 
-[Demo is HERE](https://yenereren.github.io/thumbify/demo/example-1.html)
+[HERE](https://yenereren.github.io/thumbify/demo/example-1.html)
 
 
 ### Install
