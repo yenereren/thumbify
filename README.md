@@ -48,7 +48,7 @@ $(document).ready(function(){
 );
 ```
 
-### Usage
+### Test
 
 There is no tests added, but this does not mean, it will last forever
 
