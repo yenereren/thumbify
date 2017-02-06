@@ -1,5 +1,5 @@
 /*
- * Thumbify Pruduct Image Slider v0.0.2
+ * Thumbify Pruduct Image Slider v0.0.1
  * Copyright 2017 Eren Yener
  */
 
@@ -30,7 +30,7 @@
         imageClass:'thumbify-item',
 
         wrapper:"<div class='thumbify-outer'></div>",
-        navigation:"<div class='thumbify-navigator'></div>",
+        navigation:"<div class='thumbify-navigator' style='display: none'></div>",
         navigationStep:"<div class='thumbify-navigator-step' data-id='{{dataId}}'></div>",
         navStepDataId:"{{dataId}}",
         debugMode:false,
@@ -142,7 +142,10 @@
 
         if(this.currentSection != section){
             this.slideTo(section);
-            this.navTo(section);
+            if(this.options.showNagivation){
+                this.navTo(section);
+            }
+
         }
     };
 
