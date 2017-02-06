@@ -33,7 +33,6 @@
 
     Thumbify.prototype.setup = function() {
         this.log('setup');
-
         this.wrap();
         this.registerStyles();
         this.registerEvents();
@@ -75,10 +74,13 @@
 
     Thumbify.prototype.onMouseMove = function(e){
         this.log('onMouseMove');
+        var parentOffset = this.$element.parent().offset();
+        var relX = e.pageX - parentOffset.left;
         this.cursorPosition = {
-            left: e.pageX - this.elementOffset.left,
-            top: e.pageY - this.elementOffset.top
+            left: (relX < 0 ) ? relX * -1 : relX
         };
+
+        console.log(this.cursorPosition);
 
         this.slide();
     };
@@ -91,7 +93,6 @@
     Thumbify.prototype.slide =function () {
         this.log('slide');
         var section = this.getSection();
-        console.log("section => " + section);
         this.slideTo(section);
     };
 
