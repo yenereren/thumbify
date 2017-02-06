@@ -35,10 +35,12 @@ div>
 
 ```js
 $(document).ready(function(){
+
     var config = {
         width:500,
         showNagivation:true
     };
+
     $('.product-images-container').thumbify(config);
 );
 ```
