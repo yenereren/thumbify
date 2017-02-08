@@ -1,5 +1,6 @@
 .thumbify-outer {
     overflow: hidden;
+    position: relative;
 }
 
 .thumbify-stage {
@@ -14,4 +15,27 @@
     -webkit-backface-visibility: hidden;
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
+}
+
+.thumbify-navigator {
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+
+.thumbify-navigator-step {
+    width: 10px;
+    height: 10px;
+    background-color: #FFFFFF;
+    display: inline-block;
+    margin-left: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.thumbify-navigator-step.active{
+    background-color: orange;
 }
