@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="thumbify/thumbify.css" rel="stylesheet" type="text/css">
-    <title>Example 1</title>
+    <title>Thumbify</title>
 </head>
 
 <style>
@@ -35,6 +35,19 @@
                     <img src="https://img-trendyol.mncdn.com/mnresize/250/550//Assets/ProductImages/57736/2314196402257_1_org_zoom.jpg">
                 </div>
             </div>
+
+            <div class="products">
+                <div class="product-images-container-2">
+                    <img src="https://img-trendyol.mncdn.com/mnresize/250/550//Assets/ProductImages/57736/2314196402929_1_org_zoom.jpg">
+                </div>
+            </div>
+
+            <div class="products">
+                <div class="product-images-container-2">
+                    <img src="https://img-trendyol.mncdn.com/mnresize/250/550//Assets/ProductImages/57736/2314196402929_1_org_zoom.jpg">
+                    <img src="https://img-trendyol.mncdn.com/mnresize/250/550//Assets/ProductImages/57736/2314196402257_1_org_zoom.jpg">
+                </div>
+            </div>
         </div>
     </div>
 
@@ -53,6 +66,15 @@
 
         };
         $('.product-images-container').thumbify(config);
+
+        var config2 = {
+            width:500,
+            showNagivation:true,
+            showNagivation:true,
+            minImageCount:2
+        };
+
+        $('.product-images-container-2').thumbify(config);
     });
 
 </script>

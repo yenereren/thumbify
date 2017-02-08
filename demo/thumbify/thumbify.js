@@ -25,7 +25,7 @@
 
         showNagivation:true,
         width:250,
-
+        minImageCount: 2,
         containerClass:'thumbify-stage',
         imageClass:'thumbify-item',
 
@@ -38,12 +38,15 @@
 
     Thumbify.prototype.setup = function() {
         this.log('setup');
-        this.wrap();
-        this.registerStyles();
-        if(this.options.showNagivation){
-            this.appendNavbar();
+
+        if(this.imageCount >= this.options.minImageCount){
+            this.wrap();
+            this.registerStyles();
+            if(this.options.showNagivation){
+                this.appendNavbar();
+            }
+            this.registerEvents();
         }
-        this.registerEvents();
     };
 
     Thumbify.prototype.log = function(message) {
@@ -132,7 +135,7 @@
                 this.$navbar.hide();
             }
         }
-            var section = this.getSection();
+        var section = this.getSection();
         this.slideTo(section);
     };
 
