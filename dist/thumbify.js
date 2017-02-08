@@ -1,6 +1,5 @@
 /*
  * Thumbify Pruduct Image Slider v0.0.1
- * Copyright 2017 Eren Yener
  */
 
 ;(function($, window, document, undefined) {
@@ -9,39 +8,51 @@
 
         this.settings = null;
         this.options = $.extend({}, Thumbify.Defaults, options);
+        this.constants = Thumbify.Constants;
         this.$element = $(element);
         this.$images = this.$element.find('img');
         this.imageCount = this.$images.length;
         this.$wrapper = null;
         this.$navbar = null;
         this.currentSection = null;
-        this.elementOffset = this.$element.offset();
         this.cursorPosition = null;
 
         this.setup();
     }
 
     Thumbify.Defaults = {
-
-        showNagivation:true,
         width:250,
         minImageCount: 2,
-        containerClass:'thumbify-stage',
-        imageClass:'thumbify-item',
+        maxImageCount: 4,
+        showNagivation:true,
+        wrapperClass:'',
+        navClass: '',
+        debugMode:false
+    };
 
-        wrapper:"<div class='thumbify-outer'></div>",
-        navigation:"<div class='thumbify-navigator' style='display: none'></div>",
+    Thumbify.Constants = {
+        wrapper:"<div class='thumbify-outer {{wrapperClass}}'></div>",
+        navigation:"<div class='thumbify-navigator {{navigatorClass}}' style='display: none'></div>",
         navigationStep:"<div class='thumbify-navigator-step' data-id='{{dataId}}'></div>",
-        navStepDataId:"{{dataId}}",
-        debugMode:false,
+        navStepDataIdReplaceKey:"{{dataId}}",
+        navigationClassReplaceKey: "{{navigatorClass}}",
+        wrapperClassReplaceKey: "{{wrapperClass}}",
+        containerClass:'thumbify-stage',
+        imageClass:'thumbify-item'
     };
 
     Thumbify.prototype.setup = function() {
         this.log('setup');
 
-        if(this.imageCount >= this.options.minImageCount){
+        if (this.imageCount >= this.options.minImageCount) {
             this.wrap();
             this.registerStyles();
+
+            if (this.imageCount >= this.options.maxImageCount) {
+                var overflowCount = this.imageCount - this.options.maxImageCount;
+                this.hideOverflowedImages(overflowCount);
+                this.imageCount = this.options.maxImageCount;
+            }
             if(this.options.showNagivation){
                 this.appendNavbar();
             }
@@ -57,36 +68,52 @@
 
     Thumbify.prototype.wrap = function(){
         this.log('wrap');
-        this.$element.wrap( this.options.wrapper );
+        var wrapper = this.getElement(this.constants.wrapper, this.constants.wrapperClassReplaceKey, this.options.wrapperClass);
+        this.$element.wrap(wrapper);
         this.$wrapper = this.$element.parent();
+    };
+
+    Thumbify.prototype.hideOverflowedImages = function(overflowCount){
+        var self = this;
+        var i = this.imageCount;
+        var lastShouldBeHiddenIndex = this.imageCount - overflowCount;
+        for(var i = this.imageCount; i > lastShouldBeHiddenIndex; i-- ){
+            console.log(i);
+
+            $(self.$images[i]).hide();
+        }
     };
 
     Thumbify.prototype.appendNavbar = function(){
         var self = this;
-
         self.log('appendNavbar');
-        self.$wrapper.append(self.options.navigation);
+        var navigation = this.getElement(this.constants.navigation, this.constants.navigationClassReplaceKey, this.options.navClass);
+        self.$wrapper.append(navigation);
         self.$navbar = self.$wrapper.find('.thumbify-navigator');
 
-        for(var i=1; i<=this.imageCount; i++){
-            var navElement = self.getNavElement(i);
+
+        for(var i=1; i <= this.imageCount; i++){
+            var navElement = self.getElement(self.constants.navigationStep, this.constants.navStepDataIdReplaceKey, i);
             self.$navbar.append(navElement);
         }
     };
 
-    Thumbify.prototype.getNavElement = function(dataId){
-        var navElement  = this.options.navigationStep.replace(this.options.navStepDataId, dataId);
-        return navElement;
+    Thumbify.prototype.getElement = function(element, replaceKey, replaceValue){
+        var result = element;
+        if(!!element){
+            var result = element.replace(replaceKey, replaceValue);
+        }
+        return result;
     };
 
     Thumbify.prototype.registerStyles = function(){
         var self =this;
         this.log('registerStyles');
-        this.$element.addClass(this.options.containerClass);
+        this.$element.addClass(this.constants.containerClass);
         this.$element.css('width', this.getImageContainerWidth());
         this.$element.css('transform', 'translate3d(0px, 0px, 0px)');
         this.$element.css('transition', '0');
-        this.$images.addClass(this.options.imageClass);
+        this.$images.addClass(this.constants.imageClass);
         this.$images.css('width', this.options.width);
         this.$wrapper.css('width', this.options.width);
     };

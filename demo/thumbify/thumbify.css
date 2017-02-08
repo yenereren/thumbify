@@ -4,12 +4,10 @@
 }
 
 .thumbify-stage {
-    position: relative;
     overflow: hidden;
 }
 
 .thumbify-item{
-    position: relative;
     min-height: 1px;
     float: left;
     -webkit-backface-visibility: hidden;
